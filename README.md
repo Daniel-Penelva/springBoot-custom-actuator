@@ -113,5 +113,44 @@ Em um ambiente de produção, geralmente usaria mecanismos mais robustos de aute
 
 Lembre-se de que a autenticação básica transmite as credenciais em texto simples, então é essencial usar HTTPS para criptografar a comunicação e proteger as informações de autenticação durante a transmissão.
 
+## Spring Actuator customizando endpoints - Classe MyCustomActuator
+
+O código abaixo é um exemplo de como criar um endpoint personalizado para o Spring Boot Actuator. Vou explicar cada parte:
+
+```java
+@Endpoint(id = "myendpoint")
+@Component
+public class MyCustomActuator {
+
+    @ReadOperation
+    @Bean
+    public String endPoint(){
+        return "Hello this is a message from Custom Actuator Endpoint.";
+    }
+}
+```
+
+1. `@Endpoint(id = "myendpoint")`: Esta anotação é usada para marcar a classe como um endpoint do Spring Boot Actuator. O parâmetro `id` é opcional e fornece um identificador exclusivo para o endpoint. Neste caso, o identificador é definido como "myendpoint".
+
+2. `@Component`: Esta anotação é usada para indicar que a classe é um componente gerenciado pelo Spring. Isso permite que o Spring Boot a detecte e o inclua no contexto da aplicação.
+
+3. `@ReadOperation`: Esta anotação é usada para indicar que o método `endPoint()` é uma operação de leitura do endpoint, ou seja, é uma operação que recupera informações e não faz alterações no estado do aplicativo.
+
+4. `@Bean`: Esta anotação é usada para indicar que o método `endPoint()` produz um bean gerenciado pelo Spring. Embora seja comumente usado com métodos em classes de configuração, neste contexto, está sendo usado para criar o conteúdo que será retornado pelo endpoint personalizado.
+
+5. O método `endPoint()`: Este método retorna uma mensagem de saudação que será exibida quando o endpoint personalizado for acessado.
+
+A propriedade abaixo:
+
+```properties
+management.endpoints.web.exposure.include=myendpoint
+```
+
+Esta configuração controla quais endpoints do Spring Boot Actuator são expostos via HTTP. No exemplo, `myendpoint` é incluído, o que significa que o endpoint personalizado que eu criei (`MyCustomActuator`) estará disponível via HTTP no caminho `/actuator/myendpoint`.
+
+Se acessar `http://localhost:8080/actuator/myendpoint`, você verá a mensagem retornada pelo método `endPoint()`.
+
+Essa abordagem é útil quando precisa criar endpoints personalizados para expor informações específicas ou funcionalidades adicionais através do Spring Boot Actuator.
+
 # Autor
 ## Feito por: `Daniel Penelva de Andrade`

@@ -9,6 +9,7 @@ public class CustomActuatorExample {
     // http://localhost:8080/hello
     // http://localhost:8080/actuator
     // http://localhost:8080/actuator/info
+    // http://localhost:8080/actuator/myendpoint
     @GetMapping("/hello")
     public String printMessage(String message){
         return "Hello All!";
