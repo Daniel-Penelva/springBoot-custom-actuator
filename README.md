@@ -92,5 +92,26 @@ Cada propriedade personalizada é agrupada sob uma chave correspondente no JSON 
 
 Portanto, ao acessar `http://localhost:8080/actuator/info`, você verá as informações personalizadas do seu aplicativo, além de quaisquer outras informações padrão ou personalizadas configuradas nesse endpoint. Isso pode ser útil para fornecer detalhes sobre a versão do aplicativo, descrição, autor e outros dados relevantes. Lembre-se de que o formato exato pode variar dependendo da versão específica do Spring Boot e das configurações adicionais que você tenha no seu projeto.
 
+## Spring Security para Actuator Endpoints 
+
+As propriedades `spring.security.user.name` e `spring.security.user.password` são usadas para configurar um usuário com nome de usuário (username) e senha (password) quando você está configurando a segurança básica (Basic Authentication) em um aplicativo Spring Boot. Essa configuração é útil ao precisar restringir o acesso a certas partes do aplicativo ou a determinados endpoints por meio da autenticação.
+
+No seu exemplo:
+
+```properties
+spring.security.user.name=Daniel
+spring.security.user.password=admin
+```
+
+- `spring.security.user.name`: Define o nome de usuário associado ao usuário configurado para fins de autenticação. Neste caso, o nome de usuário é "Daniel".
+
+- `spring.security.user.password`: Define a senha associada ao usuário configurado. Neste caso, a senha é "admin".
+
+Quando configura essas propriedades e, em seguida, tenta acessar partes do seu aplicativo que exigem autenticação, o Spring Boot utilizará as credenciais fornecidas para autenticar o usuário. No entanto, é importante observar que esta é uma configuração básica e não deve ser usada em ambientes de produção para sistemas reais, pois as credenciais são mantidas no arquivo de propriedades, o que não é seguro.
+
+Em um ambiente de produção, geralmente usaria mecanismos mais robustos de autenticação, como OAuth, LDAP, ou integração com sistemas de gerenciamento de identidade.
+
+Lembre-se de que a autenticação básica transmite as credenciais em texto simples, então é essencial usar HTTPS para criptografar a comunicação e proteger as informações de autenticação durante a transmissão.
+
 # Autor
 ## Feito por: `Daniel Penelva de Andrade`
